@@ -8,7 +8,7 @@ function Profile() {
     <div style={{ padding: "20px" }}>
       <h1>Profile</h1>
       {user ? (
-        <p>Welcome, {user.email}</p>
+        <p>Welcome, {user.name}</p>
       ) : (
         <p>You are not logged in.</p>
       )}
