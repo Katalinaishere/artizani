@@ -7,25 +7,8 @@
 .shop-title {
   text-align: center;
   color: #6b4f3f; /* calm brown */
-  margin-bottom: 20px;
-  font-size: 2rem;
-}
-
-.refresh-btn {
-  display: block;
-  margin: 0 auto 30px auto;
-  padding: 10px 20px;
-  background-color: #b5651d; /* soft warm tone */
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.refresh-btn:hover {
-  background-color: #a35217;
-  transform: scale(1.05);
+  font-size: 2.2rem;
+  margin-bottom: 30px;
 }
 
 .shop-grid {
@@ -33,4 +16,11 @@
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 25px;
   justify-items: center;
+}
+
+.loading-text,
+.error-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #b5651d;
 }

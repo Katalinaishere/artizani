@@ -17,3 +17,11 @@ export const protect = async (req, res, next) => {
     res.status(401).json({ message: "No token, authorization denied" });
   }
 };
+
+export const adminOnly = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(403).json({ message: "Admin access only" });
+  }
+};

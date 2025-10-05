@@ -1,23 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
-import { products as allProducts } from "../services/products";
-import './Shop.css';
+import "./Shop.css";
 
 function Shop() {
-  const [products, setProducts] = useState(allProducts);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const handleRefresh = () => {
-    setProducts([...allProducts]);
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/products");
+      if (!res.ok) throw new Error("Failed to fetch products");
+      const data = await res.json();
+      setProducts(data);
+    } catch (err) {
+      console.error(err);
+      setError("❌ Error fetching products. Is backend running?");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  if (loading) return <p className="loading-text">Loading products...</p>;
+  if (error) return <p className="error-text">{error}</p>;
 
   return (
     <div className="shop-container">
       <h1 className="shop-title">Shop</h1>
-      <button className="refresh-btn" onClick={handleRefresh}>Refresh Products</button>
-
       <div className="shop-grid">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>
@@ -25,4 +41,3 @@ function Shop() {
 }
 
 export default Shop;
-import './Shop.css';
